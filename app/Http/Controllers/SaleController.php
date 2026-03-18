@@ -3,63 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $sales = Sale::with('product')->latest()->get();
+        $products = Product::all();
+        return view('sales.index', compact('sales', 'products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Sale $sale)
-    {
-        //
-    }
+        $product = Product::findOrFail($request->product_id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sale $sale)
-    {
-        //
-    }
+        if ($request->quantity > $product->stock) {
+            return redirect()->back()->withErrors(['quantity' => 'Insufficient stock']);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sale $sale)
-    {
-        //
-    }
+        $product->stock -= $request->quantity;
+        $product->save();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sale $sale)
-    {
-        //
+        $total_price = $product->price * $request->quantity;
+
+        Sale::create([
+            'product_id' => $product->id,
+            'quantity' => $request->quantity,
+            'total_price' => $total_price,
+        ]);
+
+        return redirect()->route('sales.index')->with('success', 'Sale recorded successfully!');
     }
 }

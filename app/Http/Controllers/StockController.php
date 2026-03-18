@@ -3,72 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $stocks = Stock::with('product')->latest()->get();
+        $products = Product::all();
+        return view('stocks.index', compact('stocks', 'products'));
     }
 
     public function store(Request $request)
-{
-    $product = Product::findOrFail($request->product_id);
-
-    if ($request->type == 'in') {
-        $product->stock += $request->quantity;
-    } else {
-        $product->stock -= $request->quantity;
-    }
-
-    $product->save();
-
-    Stock::create($request->all());
-
-    return back();
-}
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Stock $stock)
     {
-        //
-    }
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'type' => 'required|in:in,out',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Stock $stock)
-    {
-        //
-    }
+        $product = Product::findOrFail($request->product_id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Stock $stock)
-    {
-        //
-    }
+        // Update stock
+        if ($request->type == 'in') {
+            $product->stock += $request->quantity;
+        } else {
+            $product->stock -= $request->quantity;
+        }
+        $product->save();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Stock $stock)
-    {
-        //
+        Stock::create($request->all());
+
+        return redirect()->route('stocks.index')->with('success', 'Stock updated successfully!');
     }
 }
