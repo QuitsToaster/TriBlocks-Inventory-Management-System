@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    //
+    protected $fillable = [
+        'product_id',
+        'quantity',
+        'total_price',
+    ];
+
+    // Relationship (you are already using this in your blade)
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
