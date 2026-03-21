@@ -6,81 +6,75 @@
 @section('stats')
     <!-- Stats Cards Row -->
     <div class="col-span-1">
+        <!-- Total Products -->
         <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg shadow-blue-500/20 p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-blue-100 text-sm font-medium">Total Products</p>
                     <p class="text-3xl font-bold mt-2">{{ $totalProducts }}</p>
-                    <p class="text-blue-100 text-xs mt-1 flex items-center">
-                        <span class="bg-blue-400/30 rounded-full px-2 py-0.5">+12 this month</span>
-                    </p>
                 </div>
                 <div class="bg-blue-400/30 rounded-2xl p-4">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        <path stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
                 </div>
-            </div>
-            <div class="mt-4 pt-4 border-t border-blue-400/30">
-                <a href="{{ route('products.index') }}" class="text-sm text-blue-100 hover:text-white flex items-center">
-                    View all products
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
             </div>
         </div>
     </div>
 
     <div class="col-span-1">
-        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg shadow-emerald-500/20 p-6 text-white">
+        <!-- Total Sales -->
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-emerald-100 text-sm font-medium">Total Sales</p>
                     <p class="text-3xl font-bold mt-2">₱{{ number_format($totalSales, 2) }}</p>
-                    <p class="text-emerald-100 text-xs mt-1 flex items-center">
-                        <span class="bg-emerald-400/30 rounded-full px-2 py-0.5 flex items-center">
-                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            +8.2% vs last month
-                        </span>
-                    </p>
                 </div>
                 <div class="bg-emerald-400/30 rounded-2xl p-4">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <path stroke-width="2" d="M12 8c-3 0-3 4 0 4s3 4 0 4m0-8v8"></path>
                     </svg>
                 </div>
-            </div>
-            <div class="mt-4 pt-4 border-t border-emerald-400/30">
-                <a href="{{ route('sales.index') }}" class="text-sm text-emerald-100 hover:text-white flex items-center">
-                    View sales report
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
             </div>
         </div>
     </div>
 
     <div class="col-span-1">
-        <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl shadow-lg shadow-amber-500/20 p-6 text-white">
+        <!-- Low Stock -->
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl shadow-lg p-6 text-white">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-amber-100 text-sm font-medium">Low Stock Items</p>
                     <p class="text-3xl font-bold mt-2">{{ $lowStocks }}</p>
-                    <p class="text-amber-100 text-xs mt-1 flex items-center">
-                        <span class="bg-amber-400/30 rounded-full px-2 py-0.5">Need reordering</span>
-                    </p>
                 </div>
                 <div class="bg-amber-400/30 rounded-2xl p-4">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        <path stroke-width="2" d="M12 9v2m0 4h.01"></path>
                     </svg>
                 </div>
             </div>
-            <div class="mt-4 pt-4 border-t border-amber-400/30">
+        </div>
+    </div>
+
+    <!-- ✅ NEW SUPPLIER CARD -->
+    <div class="col-span-1">
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg shadow-purple-500/20 p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-purple-100 text-sm font-medium">Total Suppliers</p>
+                    <p class="text-3xl font-bold mt-2">{{ $totalSuppliers ?? 0 }}</p>
+                </div>
+                <div class="bg-purple-400/30 rounded-2xl p-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-purple-400/30">
+                <a href="{{ route('suppliers.index') }}" class="text-sm text-purple-100 hover:text-white flex items-center">
+                    View suppliers
+                </a>
             </div>
         </div>
     </div>
@@ -88,6 +82,28 @@
 
 @section('content')
 <div class="space-y-6">
+    <!-- Quick Actions -->
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-5">
+        <h3 class="font-semibold text-gray-800 mb-4">Quick Actions</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <a href="{{ route('products.create') }}" class="flex flex-col items-center p-4 bg-white rounded-xl hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                </div>
+                <span class="text-xs text-gray-600">Add Product</span>
+            </a>
+            <a href="{{ route('sales.create') }}" class="flex flex-col items-center p-4 bg-white rounded-xl hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                </div>
+                <span class="text-xs text-gray-600">New Sale</span>
+            </a>
+        </div>
+    </div>
     <!-- Additional Stats Row (Optional) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Total Suppliers -->
@@ -356,29 +372,6 @@
                 </div>
                 @endforelse
             </div>
-        </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-5">
-        <h3 class="font-semibold text-gray-800 mb-4">Quick Actions</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <a href="{{ route('products.create') }}" class="flex flex-col items-center p-4 bg-white rounded-xl hover:shadow-md transition-shadow">
-                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                </div>
-                <span class="text-xs text-gray-600">Add Product</span>
-            </a>
-            <a href="{{ route('sales.create') }}" class="flex flex-col items-center p-4 bg-white rounded-xl hover:shadow-md transition-shadow">
-                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
-                </div>
-                <span class="text-xs text-gray-600">New Sale</span>
-            </a>
         </div>
     </div>
 </div>

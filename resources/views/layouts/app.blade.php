@@ -150,12 +150,7 @@
 
             {{-- Main Content --}}
             <main class="flex-1 min-h-[calc(100vh-4rem)] p-4 sm:p-6 lg:p-8 bg-gray-50/50">
-                {{-- Page Header --}}
-                <div class="mb-6">
-                    <h1 class="text-2xl font-bold text-gray-900">@yield('page-title', 'Dashboard')</h1>
-                    <p class="text-gray-600 mt-1">@yield('page-description', 'Welcome back! Here\'s what\'s happening with your inventory.')</p>
-                </div>
-
+                
                 {{-- Stats Cards (example - can be yielded) --}}
                 @hasSection('stats')
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
