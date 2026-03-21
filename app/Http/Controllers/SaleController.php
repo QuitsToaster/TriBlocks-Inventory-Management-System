@@ -41,4 +41,15 @@ class SaleController extends Controller
 
         return redirect()->route('sales.index')->with('success', 'Sale recorded successfully!');
     }
+
+    public function total()
+{
+    // Calculate total sales
+    $total = Sale::sum('total_price');
+
+    // Return as JSON
+    return response()->json([
+        'total' => number_format($total, 2, '.', ',') // formatted number
+    ]);
+}
 }

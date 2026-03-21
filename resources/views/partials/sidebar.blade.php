@@ -1,14 +1,4 @@
 <aside class="fixed left-0 top-0 h-full w-64 bg-white/80 backdrop-blur-md border-r border-gray-200/50 z-30 sidebar-transition overflow-y-auto" id="sidebar">
-    
-    <!-- Quick Action Button -->
-    <div class="p-4 border-b border-gray-200/50">
-        <a href="{{ route('products.create') }}" class="flex items-center justify-center w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2.5 rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 transform hover:scale-[1.02] font-medium text-sm group">
-            <svg class="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            Add New Product
-        </a>
-    </div>
 
     <!-- Main Navigation -->
     <nav class="p-4 flex flex-col h-[calc(100%-73px)]">
@@ -192,15 +182,16 @@
                 .catch(error => console.error('Error fetching supplier count:', error));
 
             // Fetch sales total
-            fetch('{{ route("api.sales.total") }}')
-                .then(response => response.json())
-                .then(data => {
-                    const salesTotalElement = document.getElementById('salesTotal');
-                    if (salesTotalElement) {
-                        salesTotalElement.textContent = data.total ? `$${data.total}` : '$0';
-                    }
-                })
-                .catch(error => console.error('Error fetching sales total:', error));
+            // Fetch sales total in PHP
+fetch('{{ route("api.sales.total") }}')
+    .then(response => response.json())
+    .then(data => {
+        const salesTotalElement = document.getElementById('salesTotal');
+        if (salesTotalElement) {
+            salesTotalElement.textContent = data.total ? `₱${data.total}` : '₱0.00';
+        }
+    })
+    .catch(error => console.error('Error fetching sales total:', error));
         }
 
         // Initial update

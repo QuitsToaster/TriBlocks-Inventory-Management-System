@@ -44,9 +44,6 @@ Route::get('/api/suppliers/count', function() {
     return response()->json(['count' => App\Models\Supplier::count()]);
 })->name('api.suppliers.count');
 
-Route::get('/api/sales/total', function() {
-    $total = App\Models\Sale::whereDate('created_at', now()->toDateString())->sum('total_amount');
-    return response()->json(['total' => number_format($total, 2)]);
-})->name('api.sales.total');
+Route::get('/api/sales/total', [SaleController::class, 'total'])->name('api.sales.total');
 
 require __DIR__.'/auth.php';
