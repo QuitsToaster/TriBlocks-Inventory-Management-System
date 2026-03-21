@@ -30,4 +30,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+// In routes/web.php or routes/api.php
+Route::get('/api/products/count', function() {
+    return response()->json(['count' => App\Models\Product::count()]);
+})->name('api.products.count');
+
+Route::get('/api/stocks/low-count', function() {
+    $lowStockThreshold = 10; // Adjust as needed
+    return response()->json(['count' => App\Models\Product::where('quantity', '<=', $lowStockThreshold)->count()]);
+})->name('api.stocks.low-count');
+
+Route::get('/api/suppliers/count', function() {
+    return response()->json(['count' => App\Models\Supplier::count()]);
+})->name('api.suppliers.count');
+
+Route::get('/api/sales/total', function() {
+    $total = App\Models\Sale::whereDate('created_at', now()->toDateString())->sum('total_amount');
+    return response()->json(['total' => number_format($total, 2)]);
+})->name('api.sales.total');
+
 require __DIR__.'/auth.php';
